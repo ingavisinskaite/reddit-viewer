@@ -1,6 +1,6 @@
 import { Post } from './../../models/post.model';
 import { ThemesService } from './../../services/themes.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -14,6 +14,8 @@ export class MainComponent implements OnInit {
   limitTo = 20;
   images: Array<Post> = [];
   buttonClicked = false;
+  theme = false;
+
   constructor(private data: ThemesService) { }
 
   ngOnInit() {
@@ -60,6 +62,11 @@ export class MainComponent implements OnInit {
       });
       return this.images;
     });
+  }
+
+  public selectTheme(event: any) {
+    console.log(event);
+    this.theme = true;
   }
 
 }

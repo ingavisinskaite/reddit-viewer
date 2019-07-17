@@ -4,7 +4,7 @@
   fxLayoutAlign.xs="space-around" fxLayoutGap="20">
   <mat-form-field fxFlex class="selectThemes">
     <mat-label>Select Reddist</mat-label>
-    <mat-select [(ngModel)]="selectedTheme">
+    <mat-select [(ngModel)]="selectedTheme" (ngModelChange)="selectTheme($event)">
       <mat-option *ngFor="let theme of themesToSelect" [value]="theme">
         {{ theme }}
       </mat-option>
@@ -21,7 +21,7 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="getTheme(selectedTheme, limitTo)" fxFlex="15%">READY!</button>
+  <button mat-raised-button color="primary" (click)="getTheme(selectedTheme, limitTo)" disabled="{{!theme}}" fxFlex="15%">READY!</button>
 </mat-card>
 
 <app-posts *ngIf="buttonClicked"  [images]="images"></app-posts>
