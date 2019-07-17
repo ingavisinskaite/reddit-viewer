@@ -11,7 +11,7 @@ export class MainComponent implements OnInit {
   themes: Array<any>;
   themesToSelect: Array<string> = [];
   selectedTheme: string;
-  limitTo: number;
+  limitTo = 20;
   images: Array<Post> = [];
   buttonClicked = false;
   constructor(private data: ThemesService) { }
