@@ -1,0 +1,27 @@
+<h1>Reddit viewer</h1>
+
+<mat-card class="select" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center"
+  fxLayoutAlign.xs="space-around" fxLayoutGap="20">
+  <mat-form-field fxFlex class="selectThemes">
+    <mat-label>Select Reddist</mat-label>
+    <mat-select [(ngModel)]="selectedTheme">
+      <mat-option *ngFor="let theme of themesToSelect" [value]="theme">
+        {{ theme }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field fxFlex="20%" class="selectLimit">
+    <mat-label>Number of Redists</mat-label>
+    <mat-select [(ngModel)]="limitTo">
+      <mat-option value="12">12</mat-option>
+      <mat-option value="20">20</mat-option>
+      <mat-option value="60">60</mat-option>
+      <mat-option value="100">100</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="getTheme(selectedTheme, limitTo)" fxFlex="15%">READY!</button>
+</mat-card>
+
+<app-posts *ngIf="buttonClicked"  [images]="images"></app-posts>

@@ -1,0 +1,16 @@
+<mat-card *ngIf="images.length > 1 else loading" class="images" fxLayout="row wrap" fxLayout.xs="column"
+  fxLayoutAlign="center" fxLayoutGap="20">
+  <figure *ngFor="let image of images" fxFlex="22" appSearch class="container">
+    <img src="{{image.imageUrl}}" class="post">
+    <a class="searchIcon" href="{{image.postUrl}}" target="_blank"><img src="../../../assets/search.png">
+      <p>View on Reddit</p>
+    </a>
+  </figure>
+</mat-card>
+
+
+<ng-template #loading>
+  <mat-card class="load">
+    <mat-progress-spinner class="loading" [color]="color" [mode]="mode" [value]="value"></mat-progress-spinner>
+  </mat-card>
+</ng-template>
