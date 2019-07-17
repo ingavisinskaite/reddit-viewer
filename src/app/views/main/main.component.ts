@@ -50,7 +50,8 @@ export class MainComponent implements OnInit {
       data.data.children.map(post => {
         if (post.data.url !== '') {
           const urlArr = post.data.url.split('');
-          if (urlArr[8] === 'i') {
+          console.log(urlArr);
+          if (urlArr[8] === 'i' && urlArr[urlArr.length - 1] !== 'v') {
             const formattedPostUrl = 'https://www.reddit.com' + post.data.permalink;
             const article = {
               imageUrl: post.data.url,
