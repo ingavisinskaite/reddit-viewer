@@ -45,7 +45,8 @@ export class MainComponent implements OnInit {
   public getTheme(theme: string, limit: number): void {
     this.buttonClicked = true;
     const formattedTheme = this.formatTheme(theme);
-    this.data.getTheme(formattedTheme, limit).then(data => {
+    this.images = [];
+    this.data.getTheme(formattedTheme, limit).subscribe(data => {
       console.log(data);
       data.data.children.map(post => {
         if (post.data.url !== '') {
@@ -68,6 +69,8 @@ export class MainComponent implements OnInit {
   public selectTheme(event: any) {
     console.log(event);
     this.theme = true;
+    this.selectedTheme = event;
+    console.log(this.selectedTheme);
   }
 
 }

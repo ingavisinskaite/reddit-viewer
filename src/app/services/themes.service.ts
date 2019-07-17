@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,8 +15,8 @@ export class ThemesService {
     return this._http.get<any>(url).toPromise();
   }
 
-  public getTheme(theme: string, limit: number): Promise<any> {
+  public getTheme(theme: string, limit: number): Observable<any> {
     const url = 'https://www.reddit.com' + theme + '/.json?&show=all&limit=' + limit;
-    return this._http.get<any>(url).toPromise();
+    return this._http.get<any>(url);
   }
 }
