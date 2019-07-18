@@ -47,20 +47,25 @@ export class MainComponent implements OnInit {
     this.images = [];
     this.data.getTheme(formattedTheme, limit).subscribe(data => {
       console.log(data);
-      this.images = data.data.children.map(post => {
+      data.data.children.map(post => {
+        let article = {
+          imageUrl: '',
+          postUrl: ''
+        };
         if (post.data.url !== '') {
           const urlArr = post.data.url.split('');
           console.log(urlArr);
           if (urlArr[8] === 'i' && urlArr[urlArr.length - 1] !== 'v') {
             const formattedPostUrl = 'https://www.reddit.com' + post.data.permalink;
-            const article = {
+            article = {
               imageUrl: post.data.url,
               postUrl: formattedPostUrl
             };
-            return article;
+            this.images.push(article);
           }
         }
       });
+      console.log(this.images);
     });
   }
 
