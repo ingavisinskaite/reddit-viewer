@@ -1,4 +1,4 @@
-import { Post } from './../../models/post.model';
+import { Post, Theme } from './../../models';
 import { ThemesService } from './../../services/themes.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -8,7 +8,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  themes: Array<any>;
+  private themes: Array<Theme>;
   themesToSelect: Array<string> = [];
   selectedTheme: string;
   limitTo = 20;
@@ -25,14 +25,13 @@ export class MainComponent implements OnInit {
   private getAllThemes(): void {
     this.data.getAllThemes().then(data => {
       this.themes = data.data.children;
-      this.themes.map(theme => {
+      console.log(this.themes);
+      this.themesToSelect = this.themes.map(theme => {
         const urlArr = theme.data.url.split('/');
         const lowerCaseTheme = urlArr[2];
         const formattedTheme = lowerCaseTheme.charAt(0).toUpperCase() + lowerCaseTheme.slice(1);
-        this.themesToSelect.push(formattedTheme);
+        return formattedTheme;
       });
-      console.log(this.themesToSelect);
-      return this.themesToSelect;
     });
   }
 
@@ -48,7 +47,7 @@ export class MainComponent implements OnInit {
     this.images = [];
     this.data.getTheme(formattedTheme, limit).subscribe(data => {
       console.log(data);
-      data.data.children.map(post => {
+      this.images = data.data.children.map(post => {
         if (post.data.url !== '') {
           const urlArr = post.data.url.split('');
           console.log(urlArr);
@@ -58,19 +57,17 @@ export class MainComponent implements OnInit {
               imageUrl: post.data.url,
               postUrl: formattedPostUrl
             };
-            this.images.push(article);
+            return article;
           }
         }
       });
-      return this.images;
     });
   }
 
-  public selectTheme(event: any) {
-    console.log(event);
+  public selectTheme(event: string): boolean {
     this.theme = true;
     this.selectedTheme = event;
-    console.log(this.selectedTheme);
+    return this.theme;
   }
 
 }
